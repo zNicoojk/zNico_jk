@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101018" />
+  <meta name="description" content="Todos mis links en un solo lugar." />
+  <title>Mis links · zNico_jk</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      --text: #fff;
+      --muted: #d4cfdf;
+      --panel: rgb(255 255 255 / 2%);
+      --panel-hover: rgb(255 255 255 / 5%);
+      --border: rgb(255 255 255 / 17%);
+    }
+
+    * { box-sizing: border-box; }
+    html { min-width: 320px; min-height: 100%; background: #101018; }
+    body { min-width: 320px; min-height: 100vh; min-height: 100svh; margin: 0; color: var(--text); background: #101018; }
+
+    .backdrop {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+      background: #101018;
+      pointer-events: none;
+    }
+    .backdrop::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: url("assets/wallpaper-jett.png") center / cover no-repeat;
+    }
+    .backdrop::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(180deg, rgb(5 12 17 / 32%), rgb(7 14 11 / 58%));
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "profile" "links" "footer";
+      align-content: center;
+      align-items: center;
+      gap: 28px clamp(32px, 6vw, 88px);
+      width: min(100%, 560px);
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: max(32px, calc(env(safe-area-inset-top, 0px) + 24px)) max(24px, calc(env(safe-area-inset-right, 0px) + 24px)) max(28px, calc(env(safe-area-inset-bottom, 0px) + 20px)) max(24px, calc(env(safe-area-inset-left, 0px) + 24px));
+    }
+
+    .profile { grid-area: profile; margin: 0; text-align: center; }
+    .avatar {
+      display: block;
+      width: clamp(88px, 10vw, 112px);
+      height: auto;
+      aspect-ratio: 1;
+      margin: 0 auto 18px;
+      border: 1px solid rgb(255 255 255 / 32%);
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 12px 45px rgb(139 104 214 / 32%);
+    }
+    h1 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.1; letter-spacing: -.045em; overflow-wrap: anywhere; }
+    .handle { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
+    .copy-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px auto 0;
+      padding: 9px 13px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgb(255 255 255 / 5%);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background-color .18s ease, border-color .18s ease;
+      touch-action: manipulation;
+    }
+    .copy-button:hover { border-color: rgb(169 243 255 / 65%); background: rgb(169 243 255 / 10%); }
+    .copy-button:focus-visible { outline: 3px solid #a9f3ff; outline-offset: 3px; }
+    .copy-button svg { width: 16px; height: 16px; }
+    .copy-status { min-height: 1em; margin: 6px 0 0; color: #a9f3ff; font-size: 13px; }
+    .bio { max-width: 36ch; margin: 14px auto 0; color: rgb(240 238 248 / 82%); font-size: 15px; line-height: 1.65; }
+
+    .links { display: grid; grid-area: links; gap: 12px; width: min(100%, 520px); justify-self: center; }
+    .link {
+      display: flex;
+      min-width: 0;
+      min-height: 64px;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: var(--text);
+      text-decoration: none;
+      background: var(--panel);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+      transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
+      touch-action: manipulation;
+    }
+    .icon { display: grid; flex: 0 0 38px; width: 38px; height: 38px; place-items: center; border-radius: 12px; background: rgb(255 255 255 / 3%); }
+    .icon img { display: block; width: 20px; height: 20px; object-fit: contain; }
+    .label { flex: 1; min-width: 0; font-size: 15px; font-weight: 650; overflow-wrap: anywhere; }
+    .arrow { flex: 0 0 auto; color: #d2cde0; font-size: 20px; line-height: 1; }
+    .link:focus-visible { outline: 3px solid #a9f3ff; outline-offset: 3px; }
+    footer { grid-area: footer; margin: 0; color: rgb(220 216 231 / 70%); text-align: center; font-size: 12px; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .link:hover { transform: translateY(-2px); border-color: rgb(255 255 255 / 35%); background: var(--panel-hover); }
+    }
+
+    @media (max-width: 820px) {
+      .page {
+        grid-template-columns: minmax(0, 1fr);
+        width: min(100%, 560px);
+        grid-template-areas: "profile" "links" "footer";
+        justify-content: center;
+        align-content: center;
+        gap: 26px;
+        padding-top: max(28px, calc(env(safe-area-inset-top, 0px) + 20px));
+        padding-right: max(16px, calc(env(safe-area-inset-right, 0px) + 12px));
+        padding-bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+        padding-left: max(16px, calc(env(safe-area-inset-left, 0px) + 12px));
+      }
+      .avatar { width: clamp(82px, 22vw, 100px); margin-bottom: 15px; }
+      h1 { font-size: clamp(29px, 8vw, 40px); }
+      .bio { font-size: 14px; }
+      .links { width: 100%; }
+      .link { min-height: 66px; padding-inline: 15px; }
+      footer { margin-top: 0; }
+    }
+
+    @media (max-width: 820px) and (orientation: landscape) and (max-height: 520px) {
+      .page {
+        width: min(100%, 560px);
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "profile" "links" "footer";
+        align-content: center;
+        gap: 18px 28px;
+        padding-top: max(18px, env(safe-area-inset-top, 0px));
+        padding-bottom: max(18px, env(safe-area-inset-bottom, 0px));
+      }
+      .avatar { width: 64px; margin-bottom: 8px; }
+      .profile { max-width: 42ch; justify-self: center; }
+      .bio { margin-top: 8px; }
+      .links { gap: 8px; }
+      .link { min-height: 54px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <main class="page">
+    <header class="profile">
+      <img class="avatar" src="perfil.png" alt="Foto de perfil de zNico_jk" width="112" height="112" />
+      <h1>zNico_jk</h1>
+      <p class="handle">@zNico_jk</p>
+      <button class="copy-button" id="copy-user" type="button" aria-describedby="copy-status">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>
+        <span>Copiar usuario</span>
+      </button>
+      <p class="copy-status" id="copy-status" aria-live="polite"></p>
+      <p class="bio">¡Hola! Este es mi rincón de internet. Encuéntrame en mis redes ✨</p>
+    </header>
+    <nav class="links" aria-label="Mis redes y enlaces" id="links"></nav>
+    <footer>Hecho por @zNico_jk </footer>
+  </main>
+  <script>
+    // Cambia los textos y las direcciones por los de tus propias cuentas.
+    // Para agregar otra aplicación, duplica una línea dentro de esta lista.
+    const links = [
+      { name: "Instagram", icon: "assets/icons/instagram.svg", url: "https://instagram.com/znico_jk" },
+      { name: "Discord", icon: "assets/icons/discord.svg", url: "https://discord.com/users/287760367374041091" },
+      { name: "X", icon: "assets/icons/x.svg", url: "https://x.com/znico_jk" },
+      { name: "TikTok", icon: "assets/icons/tiktok.svg", url: "https://www.tiktok.com/@znico_sl" },
+    ];
+    const copyStatus = document.querySelector("#copy-status");
+    document.querySelector("#copy-user").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("@zNico_jk");
+      } catch {
+        const input = document.createElement("textarea");
+        input.value = "@zNico_jk";
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.append(input);
+        input.select();
+        document.execCommand("copy");
+        input.remove();
+      }
+      copyStatus.textContent = "¡Usuario copiado!";
+    });
+    document.querySelector("#links").innerHTML = links.map(({ name, icon, url }) => `
+      <a class="link" href="${url}" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true"><img src="${icon}" alt="" width="20" height="20" /></span>
+        <span class="label">${name}</span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>`).join("");
+  </script>
+</body>
+</html>
