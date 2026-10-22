@@ -61,7 +61,7 @@
       z-index: 1;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      grid-template-areas: "profile" "links" "footer";
+      grid-template-areas: "profile" "links" "about" "footer";
       align-content: center;
       align-items: center;
       gap: 28px clamp(32px, 6vw, 88px);
@@ -131,6 +131,30 @@
     .label { flex: 1; min-width: 0; font-size: 15px; font-weight: 650; overflow-wrap: anywhere; }
     .arrow { flex: 0 0 auto; color: #d2cde0; font-size: 20px; line-height: 1; }
     .link:focus-visible { outline: 3px solid #a9f3ff; outline-offset: 3px; }
+    .about {
+      display: flex;
+      grid-area: about;
+      align-items: center;
+      gap: 16px;
+      width: min(100%, 520px);
+      justify-self: center;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+    .about-avatar {
+      flex: 0 0 72px;
+      width: 72px;
+      height: 72px;
+      border: 1px solid rgb(255 255 255 / 32%);
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .about h2 { margin: 0 0 6px; font-size: 16px; }
+    .about p { margin: 0; color: rgb(240 238 248 / 82%); font-size: 14px; line-height: 1.55; }
     footer { grid-area: footer; margin: 0; color: rgb(220 216 231 / 70%); text-align: center; font-size: 12px; }
 
     @media (hover: hover) and (pointer: fine) {
@@ -141,7 +165,7 @@
       .page {
         grid-template-columns: minmax(0, 1fr);
         width: min(100%, 560px);
-        grid-template-areas: "profile" "links" "footer";
+        grid-template-areas: "profile" "links" "about" "footer";
         justify-content: center;
         align-content: center;
         gap: 26px;
@@ -162,7 +186,7 @@
       .page {
         width: min(100%, 560px);
         grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "profile" "links" "footer";
+        grid-template-areas: "profile" "links" "about" "footer";
         align-content: center;
         gap: 18px 28px;
         padding-top: max(18px, env(safe-area-inset-top, 0px));
@@ -195,6 +219,13 @@
       <p class="bio">¡Hola! Este es mi rincón de internet. Encuéntrame en mis redes ✨</p>
     </header>
     <nav class="links" aria-label="Mis redes y enlaces" id="links"></nav>
+    <section class="about" aria-labelledby="about-title">
+      <img class="about-avatar" src="perfil.png" alt="Foto de Nico" width="72" height="72" loading="lazy" />
+      <div>
+        <h2 id="about-title">Un poco sobre mí</h2>
+        <p>Soy Nico y este es mi rincón en internet. Aquí reúno mis redes para que puedas conocerme un poco más y encontrar lo que comparto.</p>
+      </div>
+    </section>
     <footer>Hecho por @zNico_jk </footer>
   </main>
   <script>
