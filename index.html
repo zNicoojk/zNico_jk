@@ -4,18 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#101018" />
-  <meta name="description" content="&#161;Hola! Soy Nico. Este es mi espacio en internet: aqu&iacute; puedes encontrar mis redes y seguir lo que comparto." />
+  <meta name="description" content="En este espacio re&uacute;no mis redes para que puedas encontrarme y seguir lo que comparto." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://znicojk.github.io/zNico_jk/" />
-  <meta property="og:title" content="Mis links &middot; zNico_jk" />
-  <meta property="og:description" content="&#161;Hola! Soy Nico. Este es mi espacio en internet: aqu&iacute; puedes encontrar mis redes y seguir lo que comparto." />
+  <meta property="og:title" content="Mis sitios &middot; zNico_jk" />
+  <meta property="og:description" content="En este espacio re&uacute;no mis redes para que puedas encontrarme y seguir lo que comparto." />
   <meta property="og:image" content="https://znicojk.github.io/zNico_jk/perfil.png" />
   <meta property="og:image:alt" content="Foto de perfil de Nico" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Mis links &middot; zNico_jk" />
-  <meta name="twitter:description" content="&#161;Hola! Soy Nico. Este es mi espacio en internet: aqu&iacute; puedes encontrar mis redes y seguir lo que comparto." />
+  <meta name="twitter:title" content="Mis sitios &middot; zNico_jk" />
+  <meta name="twitter:description" content="En este espacio re&uacute;no mis redes para que puedas encontrarme y seguir lo que comparto." />
   <meta name="twitter:image" content="https://znicojk.github.io/zNico_jk/perfil.png" />
-  <title>Mis links · zNico_jk</title>
+  <title>Mis sitios · zNico_jk</title>
   <style>
     :root {
       color-scheme: dark;
@@ -132,10 +132,8 @@
     .arrow { flex: 0 0 auto; color: #d2cde0; font-size: 20px; line-height: 1; }
     .link:focus-visible { outline: 3px solid #a9f3ff; outline-offset: 3px; }
     .about {
-      display: flex;
+      display: block;
       grid-area: about;
-      align-items: center;
-      gap: 16px;
       width: min(100%, 520px);
       justify-self: center;
       padding: 16px;
@@ -145,13 +143,13 @@
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
     }
-    .about-avatar {
-      flex: 0 0 72px;
-      width: 72px;
-      height: 72px;
-      border: 1px solid rgb(255 255 255 / 32%);
-      border-radius: 50%;
-      object-fit: cover;
+    .about-preview {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
     }
     .about h2 { margin: 0 0 6px; font-size: 16px; }
     .about p { margin: 0; color: rgb(240 238 248 / 82%); font-size: 14px; line-height: 1.55; }
@@ -220,11 +218,11 @@
     </header>
     <nav class="links" aria-label="Mis redes y enlaces" id="links"></nav>
     <section class="about" aria-labelledby="about-title">
-      <img class="about-avatar" src="perfil.png" alt="Foto de Nico" width="72" height="72" loading="lazy" />
-      <div>
-        <h2 id="about-title">Un poco sobre mí</h2>
-        <p>Soy Nico y este es mi rincón en internet. Aquí reúno mis redes para que puedas conocerme un poco más y encontrar lo que comparto.</p>
-      </div>
+      <img class="about-preview" src="assets/preview.png" alt="Imagen de zNico_jk para la vista previa de sus redes" width="1200" height="630" />
+      <h2 id="about-title">Un poco sobre mí</h2>
+      <p>Sobre mí
+
+Soy Nico y este es mi espacio personal en internet. Aquí puedes encontrar mis redes sociales, algunos de mis proyectos y otras cosas relacionadas con mis intereses. Me gusta la tecnología, explorar nuevas herramientas y aprender cosas por mi cuenta. Este sitio reúne un poco de lo que hago y las plataformas que utilizo.</p>
     </section>
     <footer>Hecho por @zNico_jk </footer>
   </main>
@@ -236,6 +234,8 @@
       { name: "Discord", icon: "assets/icons/discord.svg", url: "https://discord.com/users/287760367374041091" },
       { name: "X", icon: "assets/icons/x.svg", url: "https://x.com/znico_jk" },
       { name: "TikTok", icon: "assets/icons/tiktok.svg", url: "https://www.tiktok.com/@znico_sl" },
+      { name: "GitHub", icon: "assets/icons/github.svg", url: "https://github.com/zNicoojk" },
+      { name: "Steam", icon: "assets/icons/steam.svg", url: "https://steamcommunity.com/profiles/76561199222983741/" },
     ];
     const copyStatus = document.querySelector("#copy-status");
     document.querySelector("#copy-user").addEventListener("click", async () => {
