@@ -73,7 +73,9 @@
       min-height: 100svh;
       margin: 0 auto;
       padding: max(32px, calc(env(safe-area-inset-top, 0px) + 24px)) max(24px, calc(env(safe-area-inset-right, 0px) + 24px)) max(28px, calc(env(safe-area-inset-bottom, 0px) + 20px)) max(24px, calc(env(safe-area-inset-left, 0px) + 24px));
+      animation: page-enter .7s cubic-bezier(.2, .7, .2, 1) both;
     }
+    @keyframes page-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
     .profile { grid-area: profile; margin: 0; text-align: center; }
     .avatar {
@@ -108,6 +110,8 @@
     .copy-button:hover { border-color: rgb(169 243 255 / 65%); background: rgb(169 243 255 / 10%); }
     .copy-button:focus-visible { outline: 3px solid #a9f3ff; outline-offset: 3px; }
     .copy-button svg { width: 16px; height: 16px; }
+    .profile-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .share-button { margin-left: 0; }
     .copy-status { min-height: 1em; margin: 6px 0 0; color: #a9f3ff; font-size: 13px; }
     .bio { max-width: 36ch; margin: 14px auto 0; color: rgb(240 238 248 / 82%); font-size: 15px; line-height: 1.65; }
 
@@ -131,9 +135,21 @@
     }
     .icon { display: grid; flex: 0 0 38px; width: 38px; height: 38px; place-items: center; border-radius: 12px; background: rgb(255 255 255 / 3%); }
     .icon img { display: block; width: 20px; height: 20px; object-fit: contain; }
+    .icon.instagram { background: rgb(228 64 95 / 18%); }
+    .icon.discord { background: rgb(88 101 242 / 22%); }
+    .icon.tiktok { background: rgb(37 244 238 / 13%); }
+    .icon.github { background: rgb(255 255 255 / 12%); }
+    .icon.steam { background: rgb(102 192 244 / 18%); }
     .label { flex: 1; min-width: 0; font-size: 15px; font-weight: 650; overflow-wrap: anywhere; }
     .arrow { flex: 0 0 auto; color: #d2cde0; font-size: 20px; line-height: 1; }
     .link:focus-visible { outline: 3px solid #a9f3ff; outline-offset: 3px; }
+    .link { animation: link-enter .5s cubic-bezier(.2, .7, .2, 1) both; }
+    .link:nth-child(2) { animation-delay: .06s; }
+    .link:nth-child(3) { animation-delay: .12s; }
+    .link:nth-child(4) { animation-delay: .18s; }
+    .link:nth-child(5) { animation-delay: .24s; }
+    .link:nth-child(6) { animation-delay: .30s; }
+    @keyframes link-enter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .about {
       display: flex;
       grid-area: about;
@@ -184,6 +200,7 @@
     .about h2 { margin: 0 0 6px; font-size: 16px; }
     .about p { margin: 0; color: rgb(240 238 248 / 82%); font-size: 14px; line-height: 1.55; }
     footer { grid-area: footer; margin: 0; color: rgb(220 216 231 / 70%); text-align: center; font-size: 12px; }
+    .visits { min-height: 24px; margin-bottom: 8px; color: rgb(220 216 231 / 78%); font-size: 12px; }
 
     @media (hover: hover) and (pointer: fine) {
       .link:hover { transform: translateY(-2px); border-color: rgb(255 255 255 / 35%); background: var(--panel-hover); }
@@ -228,7 +245,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-delay: 0ms !important; }
     }
   </style>
 </head>
@@ -239,10 +256,16 @@
       <img class="avatar" src="perfil.png" alt="Foto de perfil de zNico_jk" width="112" height="112" />
       <h1>zNico_jk</h1>
       <p class="handle">@zNico_jk</p>
-      <button class="copy-button" id="copy-user" type="button" aria-describedby="copy-status">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>
-        <span>Copiar usuario</span>
-      </button>
+      <div class="profile-actions">
+        <button class="copy-button" id="copy-user" type="button" aria-describedby="copy-status">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>
+          <span>Copiar usuario</span>
+        </button>
+        <button class="copy-button share-button" id="share-page" type="button" aria-describedby="copy-status">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4m-6.6 9 6.6 4.4"/></svg>
+          <span>Compartir página</span>
+        </button>
+      </div>
       <p class="copy-status" id="copy-status" aria-live="polite"></p>
       <p class="bio">Mis redes</p>
     </header>
@@ -266,26 +289,30 @@
          </p>
       </div>
     </section>
-    <footer>By Creator @zNico_jk </footer>
+    <footer>
+      <div class="counterapi visits" ns="znicoojk.github.io" key="homepage" label="visitas" noIcon="true" noCss="true"></div>
+      <span>By Creator @zNico_jk</span>
+    </footer>
   </main>
+  <script src="https://counterapi.com/c.js" async></script>
   <script>
     // Cambia los textos y las direcciones por los de tus propias cuentas.
     // Para agregar otra aplicación, duplica una línea dentro de esta lista.
     const links = [
-      { name: "Instagram", icon: "assets/icons/instagram.svg", url: "https://instagram.com/znico_jk" },
-      { name: "Discord", icon: "assets/icons/discord.svg", url: "https://discord.com/users/287760367374041091" },
-      { name: "X", icon: "assets/icons/x.svg", url: "https://x.com/znico_jk" },
-      { name: "TikTok", icon: "assets/icons/tiktok.svg", url: "https://www.tiktok.com/@znico_sl" },
-      { name: "GitHub", icon: "assets/icons/github.svg", url: "https://github.com/zNicoojk" },
-      { name: "Steam", icon: "assets/icons/steam.svg", url: "https://steamcommunity.com/profiles/76561199222983741/" },
+      { name: "Instagram", icon: "assets/icons/instagram.svg", className: "instagram", url: "https://instagram.com/znico_jk" },
+      { name: "Discord", icon: "assets/icons/discord.svg", className: "discord", url: "https://discord.com/users/287760367374041091" },
+      { name: "X", icon: "assets/icons/x.svg", className: "x", url: "https://x.com/znico_jk" },
+      { name: "TikTok", icon: "assets/icons/tiktok.svg", className: "tiktok", url: "https://www.tiktok.com/@znico_sl" },
+      { name: "GitHub", icon: "assets/icons/github.svg", className: "github", url: "https://github.com/zNicoojk" },
+      { name: "Steam", icon: "assets/icons/steam.svg", className: "steam", url: "https://steamcommunity.com/profiles/76561199222983741/" },
     ];
     const copyStatus = document.querySelector("#copy-status");
-    document.querySelector("#copy-user").addEventListener("click", async () => {
+    const copyText = async (text) => {
       try {
-        await navigator.clipboard.writeText("@zNico_jk");
+        await navigator.clipboard.writeText(text);
       } catch {
         const input = document.createElement("textarea");
-        input.value = "@zNico_jk";
+        input.value = text;
         input.style.position = "fixed";
         input.style.opacity = "0";
         document.body.append(input);
@@ -293,11 +320,28 @@
         document.execCommand("copy");
         input.remove();
       }
-      copyStatus.textContent = "¡Usuario copiado!";
+    };
+    document.querySelector("#copy-user").addEventListener("click", async () => {
+      await copyText("@zNico_jk");
+      copyStatus.textContent = "\u00A1Usuario copiado!";
     });
-    document.querySelector("#links").innerHTML = links.map(({ name, icon, url }) => `
+    document.querySelector("#share-page").addEventListener("click", async () => {
+      const shareData = { title: "zN Links \u00B7 zNico_jk", text: "Todas mis redes @zNico_jk", url: "https://znicoojk.github.io/zNico_jk/" };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          copyStatus.textContent = "\u00A1P\u00E1gina compartida!";
+        } catch (error) {
+          if (error.name !== "AbortError") copyStatus.textContent = "No se pudo compartir la p\u00E1gina.";
+        }
+      } else {
+        await copyText(shareData.url);
+        copyStatus.textContent = "\u00A1Enlace copiado para compartir!";
+      }
+    });
+    document.querySelector("#links").innerHTML = links.map(({ name, icon, className, url }) => `
       <a class="link" href="${url}" target="_blank" rel="noopener noreferrer">
-        <span class="icon" aria-hidden="true"><img src="${icon}" alt="" width="20" height="20" /></span>
+        <span class="icon ${className}" aria-hidden="true"><img src="${icon}" alt="" width="20" height="20" /></span>
         <span class="label">${name}</span>
         <span class="arrow" aria-hidden="true">↗</span>
       </a>`).join("");
