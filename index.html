@@ -132,8 +132,10 @@
     .arrow { flex: 0 0 auto; color: #d2cde0; font-size: 20px; line-height: 1; }
     .link:focus-visible { outline: 3px solid #a9f3ff; outline-offset: 3px; }
     .about {
-      display: block;
+      display: flex;
       grid-area: about;
+      align-items: center;
+      gap: 16px;
       width: min(100%, 520px);
       justify-self: center;
       padding: 16px;
@@ -145,9 +147,9 @@
     }
     .about-preview {
       display: block;
-      width: 100%;
-      aspect-ratio: 1200 / 630;
-      margin-bottom: 14px;
+      flex: 0 0 96px;
+      width: 96px;
+      height: 96px;
       border: 1px solid var(--border);
       border-radius: 12px;
       object-fit: cover;
@@ -220,10 +222,12 @@
     <nav class="links" aria-label="Mis redes y enlaces" id="links"></nav>
     <section class="about" aria-labelledby="about-title">
       <img class="about-preview" src="perfil.png" alt="Foto de perfil de zNico_jk" width="256" height="256" />
-      <h2 id="about-title">Un poco sobre mí</h2>
-      <p>Sobre mí
+      <div>
+        <h2 id="about-title">Un poco sobre mí</h2>
+        <p>Sobre mí
 
 Soy Nico y este es mi espacio personal en internet. Aquí puedes encontrar mis redes sociales, algunos de mis proyectos y otras cosas relacionadas con mis intereses. Me gusta la tecnología, explorar nuevas herramientas y aprender cosas por mi cuenta. Este sitio reúne un poco de lo que hago y las plataformas que utilizo.</p>
+      </div>
     </section>
     <footer>Hecho por @zNico_jk </footer>
   </main>
