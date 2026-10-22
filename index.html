@@ -63,7 +63,7 @@
       z-index: 1;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      grid-template-areas: "profile" "links" "about" "footer";
+      grid-template-areas: "profile" "links" "custom" "about" "footer";
       align-content: center;
       align-items: center;
       gap: 28px clamp(32px, 6vw, 88px);
@@ -147,6 +147,30 @@
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
     }
+    .custom-link {
+      display: flex;
+      grid-area: custom;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      width: min(100%, 520px);
+      justify-self: center;
+      padding: 16px 18px;
+      border: 1px solid rgb(169 243 255 / 40%);
+      border-radius: 18px;
+      color: var(--text);
+      text-decoration: none;
+      background: rgb(169 243 255 / 8%);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
+      touch-action: manipulation;
+    }
+    .custom-link strong { display: block; font-size: 15px; }
+    .custom-link span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .custom-link .arrow { margin: 0; }
+    .custom-link:hover { transform: translateY(-2px); border-color: rgb(169 243 255 / 75%); background: rgb(169 243 255 / 13%); }
+    .custom-link:focus-visible { outline: 3px solid #a9f3ff; outline-offset: 3px; }
     .about-preview {
       display: block;
       flex: 0 0 96px;
@@ -168,7 +192,7 @@
       .page {
         grid-template-columns: minmax(0, 1fr);
         width: min(100%, 560px);
-        grid-template-areas: "profile" "links" "about" "footer";
+        grid-template-areas: "profile" "links" "custom" "about" "footer";
         justify-content: center;
         align-content: center;
         gap: 26px;
@@ -189,7 +213,7 @@
       .page {
         width: min(100%, 560px);
         grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "profile" "links" "about" "footer";
+        grid-template-areas: "profile" "links" "custom" "about" "footer";
         align-content: center;
         gap: 18px 28px;
         padding-top: max(18px, env(safe-area-inset-top, 0px));
@@ -222,6 +246,13 @@
       <p class="bio">Mis redes</p>
     </header>
     <nav class="links" aria-label="Mis redes y enlaces" id="links"></nav>
+    <a class="custom-link" href="contacto.html">
+      <div>
+        <strong>¿Quieres algo personalizado? Clic aquí</strong>
+        <span>Contáctame para solicitar el tuyo</span>
+      </div>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </a>
     <section class="about" aria-labelledby="about-title">
       <img class="about-preview" src="perfil.png" alt="Foto de perfil de zNico_jk" width="256" height="256" />
       <div>
